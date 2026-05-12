@@ -4,11 +4,9 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Please choose a Language. Bitte wähle eine Sprache. (de/en)");
-        var language = Console.ReadLine();
-        
-        Console.WriteLine("Please Choose a verison. Bitte wähle eine Version. (fancy/normal)");
-        var version = Console.ReadLine();
+        var language = GetUserLanguage();
+
+        var version = GetUserPreferredVersion();
 
         switch (version)
         {
@@ -22,6 +20,34 @@ class Program
                 FancyTranslation.Execute(language);
                 break;
             }
+        }
+    }
+    
+    private static string GetUserLanguage()
+    {
+        while (true)
+        {
+            Console.WriteLine("Please choose a Language. Bitte wähle eine Sprache. (de/en)");
+            var language = Console.ReadLine();
+            if (!string.IsNullOrEmpty(language))
+            {
+                return language;
+            }
+            Console.WriteLine("Please choose a Language! Bitte wähle eine Sprache! (de/en)");
+        }
+    }
+    
+    private static string GetUserPreferredVersion()
+    {
+        while (true)
+        {
+            Console.WriteLine("Please Choose a verison. Bitte wähle eine Version. (fancy/normal)");
+            var preferredVersion = Console.ReadLine();
+            if (!string.IsNullOrEmpty(preferredVersion))
+            {
+                return preferredVersion;
+            }
+            Console.WriteLine("Please Choose a verison. Bitte wähle eine Version. (fancy/normal)");
         }
     }
 }

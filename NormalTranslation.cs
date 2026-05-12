@@ -1,6 +1,6 @@
 namespace TranslatingStuffs;
 
-public class NormalTranslation
+public static class NormalTranslation
 {
     public static void Execute(string language)
     {
