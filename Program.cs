@@ -33,7 +33,6 @@ class Program
             {
                 return language;
             }
-            Console.WriteLine("Please choose a Language! Bitte wähle eine Sprache! (de/en)");
         }
     }
     
@@ -47,7 +46,6 @@ class Program
             {
                 return preferredVersion;
             }
-            Console.WriteLine("Please Choose a verison. Bitte wähle eine Version. (fancy/normal)");
         }
     }
 }
