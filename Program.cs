@@ -4,18 +4,24 @@ class Program
 {
     static void Main()
     {
-        
         Console.WriteLine("Please choose a Language. Bitte wähle eine Sprache. (de/en)");
         var language = Console.ReadLine();
         
-        Console.WriteLine();
+        Console.WriteLine("Please Choose a verison. Bitte wähle eine Version. (fancy/normal)");
+        var version = Console.ReadLine();
 
-        var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
-        Console.WriteLine(active["welcome"]);
-        Console.WriteLine(active["selectedLanguage"]);
-        
-        
-        Console.WriteLine(active["userState"]);
-        Console.WriteLine(active["rate"]);
+        switch (version)
+        {
+            case "normal":
+            {
+                NormalTranslation.Execute(language);
+                break;
+            }
+            case "fancy":
+            {
+                FancyTranslation.Execute(language);
+                break;
+            }
+        }
     }
 }

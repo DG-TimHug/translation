@@ -8,7 +8,9 @@ public static class DictionaryProvider
         { "userState", "How are you?" },
         { "rate", "Please leave a rating of this fake translator" },
         { "selectedLanguage", "You have selected the english Language" },
-        {"options", "Dear User you now have 2 Options. "}
+        {"options", "Dear User you now have 2 Options. "},
+        {"option1", "Option 1: Get All Translations in your current Language"},
+        {"option2","Option 2: Enter the key for any one Translation and get the text for the current language as well as for the Translated Language"}
     };
 
     internal static Dictionary<string, string> DeDic = new()
@@ -16,6 +18,9 @@ public static class DictionaryProvider
         { "welcome", "Hallo und herzlich willkommen zum Übersetzter." },
         { "userState", "Wie geht es dir?" },
         { "rate", "Bitte hinterlasse eine fake Bewertung zu diesem fake Übersetzer" },
-        { "selectedLanguage", "Du hast die deutsche Sprache ausgewählt" }
+        { "selectedLanguage", "Du hast die deutsche Sprache ausgewählt" },
+        {"options", "Lieber Nutzer, du hast nun 2 Optionen. "},
+        {"option1", "Option 1: Erhalte alle Übersetzungen in deiner Sprache"},
+        {"option2","Gib den Key für irgendene Übersetzung ein und erhalte die Übersetzung für deine aktuelle Sprache sowie auch für die übersetzte Sprache."}
     };
 }
