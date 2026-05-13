@@ -27,7 +27,7 @@ public static class NormalTranslation
             }
             case 2:
             {
-                GetCustomUserTranslation(active);
+                CustomUserTranslation(active);
                 goto default;
             }
 
@@ -53,7 +53,7 @@ public static class NormalTranslation
         }
     }
     
-    private static void GetCustomUserTranslation(Dictionary<string,string> active)
+    private static void CustomUserTranslation(Dictionary<string,string> active)
     {
         //idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
         // it works but only in external console because rider doing rider stuffs
@@ -63,7 +63,7 @@ public static class NormalTranslation
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(active["keyPlease"]);
-            Console.WriteLine(active["leave"]);
+            Console.WriteLine(active["leaveInfo"]);
             Console.ForegroundColor = ConsoleColor.White;
             var userKey = Console.ReadLine();
             if (!string.IsNullOrEmpty(userKey))
@@ -75,6 +75,10 @@ public static class NormalTranslation
                 Console.WriteLine();
             }
         }
+    }
+
+    private static void GetCustomUserTranslation(Dictionary<string, string> active)
+    {
         
     }
 }
