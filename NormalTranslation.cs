@@ -14,6 +14,7 @@ public static class NormalTranslation
         Console.WriteLine(active["options"]);
         Console.WriteLine(active["option1"]);
         Console.WriteLine(active["option2"]);
+        Console.WriteLine();
         var userOption = GetUserOption(active);
         switch (userOption)
         {
@@ -58,14 +59,14 @@ public static class NormalTranslation
         //idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
         // it works but only in external console because rider doing rider stuffs
         // also just causes program to exit not return to menu
-        var input = Console.ReadKey();
-        while (input.Key != ConsoleKey.Escape)
+        //var input = Console.ReadKey();
+        while (true)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(active["keyPlease"]);
             Console.WriteLine(active["leaveInfo"]);
             Console.ForegroundColor = ConsoleColor.White;
-            var userKey = Console.ReadLine();
+            var userKey = GetCustomUserTranslation(active);
             if (!string.IsNullOrEmpty(userKey))
             {
                 Console.WriteLine();
@@ -77,8 +78,17 @@ public static class NormalTranslation
         }
     }
 
-    private static void GetCustomUserTranslation(Dictionary<string, string> active)
+    private static string GetCustomUserTranslation(Dictionary<string, string> active)
     {
-        
+        getUserKey: var userKey = Console.ReadLine();
+        if (active[userKey] != null)
+        {
+            return userKey;
+        }
+        else
+        {
+            Console.WriteLine(active["keyPlease"]);
+        }
+        goto getUserKey;
     }
 }
