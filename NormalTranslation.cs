@@ -10,10 +10,8 @@ public static class NormalTranslation
         Console.WriteLine(active["welcome"]);
         Console.WriteLine(active["selectedLanguage"]);
         
+        ListOption(active);
         
-        Console.WriteLine(active["options"]);
-        Console.WriteLine(active["option1"]);
-        Console.WriteLine(active["option2"]);
         Console.WriteLine();
         var userOption = GetUserOption(active);
         switch (userOption)
@@ -34,9 +32,7 @@ public static class NormalTranslation
 
             default:
             {
-                Console.WriteLine(active["options"]);
-                Console.WriteLine(active["option1"]);
-                Console.WriteLine(active["option2"]);
+                ListOption(active);
                 break;
             }
         }
@@ -56,16 +52,12 @@ public static class NormalTranslation
     
     private static void CustomUserTranslation(Dictionary<string,string> active)
     {
-        //idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
+        // idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
         // it works but only in external console because rider doing rider stuffs
         // also just causes program to exit not return to menu
         //var input = Console.ReadKey();
         while (true)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(active["keyPlease"]);
-            Console.WriteLine(active["leaveInfo"]);
-            Console.ForegroundColor = ConsoleColor.White;
             var userKey = GetCustomUserTranslation(active);
             if (!string.IsNullOrEmpty(userKey))
             {
@@ -80,15 +72,29 @@ public static class NormalTranslation
 
     private static string GetCustomUserTranslation(Dictionary<string, string> active)
     {
-        getUserKey: var userKey = Console.ReadLine();
-        if (active[userKey] != null)
+        KeyPlease(active);
+        while (true)
         {
-            return userKey;
+            var userKey = Console.ReadLine();
+            if (!string.IsNullOrEmpty(userKey) && active.ContainsKey(userKey))
+            {
+                return userKey;
+            }
+            KeyPlease(active);
         }
-        else
-        {
-            Console.WriteLine(active["keyPlease"]);
-        }
-        goto getUserKey;
+    }
+
+    private static void ListOption(Dictionary<string,string> active)
+    {
+        Console.WriteLine(active["options"]);
+        Console.WriteLine(active["option1"]);
+        Console.WriteLine(active["option2"]);
+    }
+
+    private static void KeyPlease(Dictionary<string, string> active)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(active["keyPlease"]);
+        Console.ForegroundColor = ConsoleColor.White;
     }
 }
