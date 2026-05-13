@@ -12,7 +12,8 @@ public static class DictionaryProvider
         { "option1", "Option 1: Get some Default Translations in your current Language" },
         { "option2", "Option 2: Enter the key for any one Translation and get the text for the current language as well as for the Translated Language" },
         { "optionsPlease", "Please choose an Option!"},
-        { "keyPlease", "Please enter your key for the translation!"}
+        { "keyPlease", "Please enter your key for the translation!"},
+        { "leave", "Press ESC to leave."}
     };
 
     internal static Dictionary<string, string> DeDic = new()
@@ -25,6 +26,7 @@ public static class DictionaryProvider
         { "option1", "Option 1: Erhalte ein paar Standart Übersetzungen in deiner Sprache" },
         { "option2", "Option 2: Gib den Key für irgendene Übersetzung ein und erhalte die Übersetzung für deine aktuelle Sprache sowie auch für die übersetzte Sprache." },
         { "optionsPlease", "Bitte wähle eine Option"},
-        { "keyPlease", "Bitte gib den Schlüssel für deine Übersetung ein!"}
+        { "keyPlease", "Bitte gib den Schlüssel für deine Übersetung ein!"},
+        { "leave", "Drücke ESC um zu verlassen."}
     };
 }
