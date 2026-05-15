@@ -8,24 +8,23 @@ public static class FancyTranslation
     {
         var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
         AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
-        Console.WriteLine(active["selectedLanguage"]);
-        var option1 = ("Option 1", active[option1]);
+        AnsiConsole.WriteLine(active["selectedLanguage"]);
         
         var userOption = ListAndSelectOptions(active);
         
         while (true)
         {
-            switch (userOption)
+            switch (userOption.Key)
             {
-                case option1.Item1:
+                case "option1":
                 {
-                    Console.WriteLine(active["welcome"]);
-                    Console.WriteLine(active["selectedLanguage"]);
-                    Console.WriteLine(active["userState"]);
-                    Console.WriteLine(active["rate"]);
+                    AnsiConsole.WriteLine(active["welcome"]);
+                    AnsiConsole.WriteLine(active["selectedLanguage"]);
+                    AnsiConsole.WriteLine(active["userState"]);
+                    AnsiConsole.WriteLine(active["rate"]);
                     goto default;
                 }
-                case option2:
+                case "option2":
                 {
                     //CustomUserTranslation(active);
                     goto default;
@@ -40,17 +39,19 @@ public static class FancyTranslation
         }
     }
 
-    private static string ListAndSelectOptions(Dictionary<string, string> active)
+    private static (string Key, string display) ListAndSelectOptions(Dictionary<string, string> active)
     {
-
+        var option1 = ("option1", active["option1"]);
+        var option2 = ("option2", active["option2"]);
+        AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<(string Key, string Display)>()
                 .Title(active["options"])
-                .UseConverter(option1 => option1.Display)
-                .UseConverter(option2 => option2.Display)
-                .AddChoices<>(option1.Key, "Option 2"));
+                .UseConverter(option => option.Display)
+                .AddChoices(option1, option2));
 
-        AnsiConsole.MarkupLine($"Deploying to [blue]{choice}[/]");
+        AnsiConsole.MarkupLine($"Sending you to [blue]{choice.Item2}[/]!");
+        AnsiConsole.WriteLine();
         return choice;
     }
     
