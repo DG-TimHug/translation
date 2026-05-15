@@ -2,7 +2,7 @@ namespace TranslatingStuffs;
 
 public static class DictionaryProvider
 {
-    internal static Dictionary<string, string> EnDic = new()
+    public static Dictionary<string, string> EnDic = new()
     {
         { "welcome", "Hello and Welcome to ze Translator" },
         { "userState", "How are you?" },

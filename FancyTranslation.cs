@@ -18,10 +18,10 @@ public static class FancyTranslation
             {
                 case "option1":
                 {
-                    AnsiConsole.WriteLine(active["welcome"]);
-                    AnsiConsole.WriteLine(active["selectedLanguage"]);
-                    AnsiConsole.WriteLine(active["userState"]);
-                    AnsiConsole.WriteLine(active["rate"]);
+                    AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{active["selectedLanguage"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{active["userState"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{active["leaveInfo"]}[/]");
                     goto default;
                 }
                 case "option2":
@@ -61,7 +61,8 @@ public static class FancyTranslation
         {
             var userKey = GetCustomUserTranslation(active);
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[blue]{active[userKey]}[/]");
+            AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
+            AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
             Console.WriteLine();
             AnsiConsole.MarkupLine($"[red]{active["leaveInfo"]}[/]");
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);

@@ -56,6 +56,8 @@ public static class NormalTranslation
             var userKey = GetCustomUserTranslation(active);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(DictionaryProvider.DeDic[userKey]);
+            Console.WriteLine(DictionaryProvider.EnDic[userKey]);
             Console.WriteLine(active[userKey]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
