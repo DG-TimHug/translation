@@ -9,9 +9,9 @@ public static class FancyTranslation
         var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
         AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
         AnsiConsole.WriteLine(active["selectedLanguage"]);
-        
+
         var userOption = ListAndSelectOptions(active);
-        
+
         while (true)
         {
             switch (userOption.Key)
@@ -26,7 +26,7 @@ public static class FancyTranslation
                 }
                 case "option2":
                 {
-                    //CustomUserTranslation(active);
+                    CustomUserTranslation(active);
                     goto default;
                 }
 
@@ -54,6 +54,31 @@ public static class FancyTranslation
         AnsiConsole.WriteLine();
         return choice;
     }
-    
-    // DO fancy shit. 
+
+    private static void CustomUserTranslation(Dictionary<string, string> active)
+    {
+        do
+        {
+            var userKey = GetCustomUserTranslation(active);
+            Console.WriteLine();
+            AnsiConsole.MarkupLine($"[blue]{active[userKey]}[/]");
+            Console.WriteLine();
+            AnsiConsole.MarkupLine($"[red]{active["leaveInfo"]}[/]");
+        } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+    }
+
+    private static string GetCustomUserTranslation(Dictionary<string, string> active)
+    {
+        AnsiConsole.MarkupLine($"[red]{active["keyPlease"]}[/]");
+        while (true)
+        {
+            var userKey = Console.ReadLine();
+            if (!string.IsNullOrEmpty(userKey) && active.ContainsKey(userKey))
+            {
+                return userKey;
+            }
+
+            AnsiConsole.MarkupLine($"[red]{active["validKey"]}[/]");
+        }
+    }
 }
