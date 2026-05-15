@@ -1,5 +1,3 @@
-using System.Net.Security;
-
 namespace TranslatingStuffs;
 
 public static class NormalTranslation
@@ -32,7 +30,7 @@ public static class NormalTranslation
 
                 default:
                 {
-                     userOption = ListAndSelectOptions(active);
+                    userOption = ListAndSelectOptions(active);
                     break;
                 }
             }
@@ -53,9 +51,6 @@ public static class NormalTranslation
     
     private static void CustomUserTranslation(Dictionary<string,string> active)
     {
-        // idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
-        // it works but only in external console because rider doing rider stuffs
-        // also just causes program to exit not return to menu
         do
         {
             var userKey = GetCustomUserTranslation(active);

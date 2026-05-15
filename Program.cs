@@ -3,7 +3,7 @@
 class Program
 {
     static void Main()
-    {
+    { /*
         var language = GetUserLanguage();
 
         var version = GetUserPreferredVersion();
@@ -21,6 +21,10 @@ class Program
                 break;
             }
         }
+        
+        */
+        
+        FancyTranslation.Execute("en");
     }
     
     private static string GetUserLanguage()
