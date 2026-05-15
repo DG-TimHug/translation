@@ -50,7 +50,7 @@ public static class FancyTranslation
                 .UseConverter(option => option.Display)
                 .AddChoices(option1, option2));
 
-        AnsiConsole.MarkupLine($"Sending you to [blue]{choice.Item2}[/]!");
+        AnsiConsole.MarkupLine($"{active["sendingTo"]} [blue]{choice.Item2}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
@@ -64,13 +64,13 @@ public static class FancyTranslation
             AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
             AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[red]{active["leaveInfo"]}[/]");
+            AnsiConsole.MarkupLine($"[red]{active["leaveInfo"]}[/] [green]{active["continueInfo"]}[/]");
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
     private static string GetCustomUserTranslation(Dictionary<string, string> active)
     {
-        AnsiConsole.MarkupLine($"[red]{active["keyPlease"]}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{active["keyPlease"]}[/]");
         while (true)
         {
             var userKey = Console.ReadLine();
