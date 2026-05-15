@@ -7,6 +7,7 @@ public static class FancyTranslation
     public static void Execute(string language)
     {
         var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
+        AnsiConsole.WriteLine();
         AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
         AnsiConsole.WriteLine(active["selectedLanguage"]);
 

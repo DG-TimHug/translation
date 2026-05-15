@@ -60,7 +60,7 @@ public static class NormalTranslation
             Console.WriteLine(DictionaryProvider.EnDic[userKey]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-            Console.WriteLine(active["leaveInfo"]);
+            Console.WriteLine(active["leaveInfo"], active["continueInfo"]);
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
@@ -90,7 +90,7 @@ public static class NormalTranslation
 
     private static void KeyPlease(Dictionary<string, string> active)
     {
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(active["keyPlease"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
