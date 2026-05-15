@@ -21,7 +21,7 @@ public static class FancyTranslation
                     AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
                     AnsiConsole.MarkupLine($"[teal]{active["selectedLanguage"]}[/]");
                     AnsiConsole.MarkupLine($"[teal]{active["userState"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{active["leaveInfo"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{active["rate"]}[/]");
                     goto default;
                 }
                 case "option2":

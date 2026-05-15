@@ -13,7 +13,7 @@ public static class DictionaryProvider
         { "option2", "Option 2: Enter the key for any one Translation and get the text for the current language as well as for the Translated Language" },
         { "optionsPlease", "Please choose an Option!"},
         { "keyPlease", "Please enter your key for the translation!"},
-        { "leaveInfo", "Press ESC to leave."},
+        { "leaveInfo", "Press ESC to leave. Or Enter to continue."},
         { "validKey", "Please provide a Valid Key!"}
     };
 
@@ -28,7 +28,7 @@ public static class DictionaryProvider
         { "option2", "Option 2: Gib den Key für irgendene Übersetzung ein und erhalte die Übersetzung für deine aktuelle Sprache sowie auch für die übersetzte Sprache." },
         { "optionsPlease", "Bitte wähle eine Option"},
         { "keyPlease", "Bitte gib den Schlüssel für deine Übersetung ein!"},
-        { "leaveInfo", "Drücke ESC um zu verlassen."},
+        { "leaveInfo", "Drücke ESC um zu verlassen. Oder Enter um weiter zumachen."},
         { "validKey", "Bitte stelle einen gültigen Schlüssel zur verfügung"}
     };
 }

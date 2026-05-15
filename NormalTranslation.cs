@@ -58,11 +58,10 @@ public static class NormalTranslation
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(DictionaryProvider.DeDic[userKey]);
             Console.WriteLine(DictionaryProvider.EnDic[userKey]);
-            Console.WriteLine(active[userKey]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine(active["leaveInfo"]);
-        } while (Console.ReadKey().Key != ConsoleKey.Escape);
+        } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
     private static string GetCustomUserTranslation(Dictionary<string, string> active)
@@ -75,7 +74,7 @@ public static class NormalTranslation
             {
                 return userKey;
             }
-            KeyPlease(active);
+            ValidKey(active);
         }
     }
 
@@ -93,6 +92,12 @@ public static class NormalTranslation
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(active["keyPlease"]);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+    private static void ValidKey(Dictionary<string, string> active)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(active["validKey"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
 }
