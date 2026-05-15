@@ -10,30 +10,31 @@ public static class NormalTranslation
         Console.WriteLine(active["welcome"]);
         Console.WriteLine(active["selectedLanguage"]);
         
-        ListOption(active);
-        
-        Console.WriteLine();
-        var userOption = GetUserOption(active);
-        switch (userOption)
-        {
-            case 1:
-            {
-                Console.WriteLine(active["welcome"]);
-                Console.WriteLine(active["selectedLanguage"]);
-                Console.WriteLine(active["userState"]);
-                Console.WriteLine(active["rate"]);
-                goto default;
-            }
-            case 2:
-            {
-                CustomUserTranslation(active);
-                goto default;
-            }
+        var userOption = ListAndSelectOptions(active);
 
-            default:
+        while (true)
+        {
+            switch (userOption)
             {
-                ListOption(active);
-                break;
+                case 1:
+                {
+                    Console.WriteLine(active["welcome"]);
+                    Console.WriteLine(active["selectedLanguage"]);
+                    Console.WriteLine(active["userState"]);
+                    Console.WriteLine(active["rate"]);
+                    goto default;
+                }
+                case 2:
+                {
+                    CustomUserTranslation(active);
+                    goto default;
+                }
+
+                default:
+                {
+                     userOption = ListAndSelectOptions(active);
+                    break;
+                }
             }
         }
     }
@@ -42,7 +43,7 @@ public static class NormalTranslation
     {
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out var userOption) && userOption > 0)
+            if (int.TryParse(Console.ReadLine(), out var userOption) && userOption is 1 or 2)
             {
                 return userOption;
             }
@@ -55,19 +56,16 @@ public static class NormalTranslation
         // idfk if ts works, goal was to be able to press esc and then it would bring you back to the main menu
         // it works but only in external console because rider doing rider stuffs
         // also just causes program to exit not return to menu
-        //var input = Console.ReadKey();
-        while (true)
+        do
         {
             var userKey = GetCustomUserTranslation(active);
-            if (!string.IsNullOrEmpty(userKey))
-            {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine(active[userKey]);
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine();
-            }
-        }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(active[userKey]);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            Console.WriteLine(active["leaveInfo"]);
+        } while (Console.ReadKey().Key != ConsoleKey.Escape);
     }
 
     private static string GetCustomUserTranslation(Dictionary<string, string> active)
@@ -84,11 +82,14 @@ public static class NormalTranslation
         }
     }
 
-    private static void ListOption(Dictionary<string,string> active)
+    private static int ListAndSelectOptions(Dictionary<string,string> active)
     {
+        Console.WriteLine();
         Console.WriteLine(active["options"]);
         Console.WriteLine(active["option1"]);
         Console.WriteLine(active["option2"]);
+        Console.WriteLine();
+        return GetUserOption(active);
     }
 
     private static void KeyPlease(Dictionary<string, string> active)
