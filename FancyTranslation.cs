@@ -4,7 +4,8 @@ namespace TranslatingStuffs;
 
 public class FancyTranslation(string language)
 {
-    private DictionaryProvider provider = new(language);
+    private readonly DictionaryProvider provider = new(language);
+    private readonly DisplayPair displayPair = new();
 
     public void Execute()
     {
@@ -32,23 +33,24 @@ public class FancyTranslation(string language)
                     break;
                 }
             }
+
             userOption = ListAndSelectOptions();
         }
     }
 
-    private (string Key, string display) ListAndSelectOptions()
+    private DisplayPair ListAndSelectOptions()
     {
         var option1 = ("option1", provider.GetText("option1"));
         var option2 = ("option2", provider.GetText("option2"));
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<(string Key, string Display)>()
+            new SelectionPrompt<DisplayPair>()
                 .Title(provider.GetText("options"))
                 .UseConverter(option => option.Display)
-                .AddChoices(option1, option2)
+                .AddChoices<>(option1, option2)
         );
 
-        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{choice.Item2}[/]");
+        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{displayPair.Display}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
@@ -82,4 +84,10 @@ public class FancyTranslation(string language)
             AnsiConsole.MarkupLine($"[red]{provider.GetText("askValidKey")}[/]");
         }
     }
+}
+
+public record DisplayPair
+{
+    public string Key { get; init; }
+    public string Display { get; init; }
 }
