@@ -59,8 +59,8 @@ public class FancyTranslation(string language)
         {
             var userKey = GetCustomUserTranslation();
             Console.WriteLine();
-            //AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
-            //AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
+            AnsiConsole.MarkupLine($"[teal]{provider.GetEnText(userKey)}[/]");
+            AnsiConsole.MarkupLine($"[teal]{provider.GetDeText(userKey)}[/]");
             Console.WriteLine();
             AnsiConsole.MarkupLine(
                 $"[red]{provider.GetText("leaveInfo")}[/] [green]{provider.GetText("continueInfo")}[/]"

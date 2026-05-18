@@ -5,7 +5,6 @@ internal static class Program
     static void Main()
     {
         var language = GetUserLanguage();
-
         var version = GetUserPreferredVersion();
         var normal = new NormalTranslation(language);
         var fancy = new FancyTranslation(language);

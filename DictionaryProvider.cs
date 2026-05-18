@@ -22,6 +22,16 @@ public class DictionaryProvider(string language)
         return deDic.ContainsKey(key);
     }
 
+    public string GetDeText(string key)
+    {
+        return deDic[key];
+    }
+
+    public string GetEnText(string key)
+    {
+        return enDic[key];
+    }
+
     private readonly Dictionary<string, string> enDic = new()
     {
         { "welcome", "Hello and Welcome to ze Translator." },

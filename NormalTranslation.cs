@@ -57,8 +57,8 @@ public class NormalTranslation(string language)
             var userKey = GetCustomUserTranslation();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            //Console.WriteLine(DictionaryProvider.DeDic[userKey]);
-            //Console.WriteLine(DictionaryProvider.EnDic[userKey]);
+            Console.WriteLine(provider.GetEnText(userKey));
+            Console.WriteLine(provider.GetDeText(userKey));
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine(provider.GetText("leaveInfo"), provider.GetText("continueInfo"));
