@@ -14,11 +14,7 @@ public class DictionaryProvider(string language)
 
     public List<string> GetAllLanguages(string key)
     {
-        return
-        [
-            enDic[key],
-            deDic[key]
-        ];
+        return [enDic[key], deDic[key]];
     }
 
     private readonly Dictionary<string, string> enDic = new()

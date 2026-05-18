@@ -2,7 +2,7 @@ using Spectre.Console;
 
 namespace TranslatingStuffs;
 
-public class FancyTranslation(string language)
+public class FancyTranslation(string language) : ITranslator
 {
     private readonly DictionaryProvider translator = new(language);
 
@@ -39,17 +39,9 @@ public class FancyTranslation(string language)
 
     private DisplayPair ListAndSelectOptions()
     {
-        var option1 = new DisplayPair
-        {
-            Key = "option1",
-            Display = translator.GetText("option1"),
-        };
+        var option1 = new DisplayPair { Key = "option1", Display = translator.GetText("option1") };
 
-        var option2 = new DisplayPair
-        {
-            Key = "option2",
-            Display = translator.GetText("option2"),
-        };
+        var option2 = new DisplayPair { Key = "option2", Display = translator.GetText("option2") };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
@@ -93,7 +85,7 @@ public class FancyTranslation(string language)
     private void PrintCustomUserTranslation(string userKey)
     {
         Console.WriteLine();
-        
+
         foreach (var possibleOutputs in translator.GetAllLanguages(userKey))
         {
             AnsiConsole.MarkupLine($"[teal]{possibleOutputs}[/]");
@@ -107,4 +99,3 @@ public record DisplayPair
     public required string Key { get; init; }
     public required string Display { get; init; }
 }
-

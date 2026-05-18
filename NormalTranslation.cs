@@ -1,6 +1,6 @@
 namespace TranslatingStuffs;
 
-public class NormalTranslation(string language)
+public class NormalTranslation(string language) : ITranslator
 {
     private readonly DictionaryProvider translator = new(language);
 
@@ -87,11 +87,11 @@ public class NormalTranslation(string language)
         Console.WriteLine();
         return GetUserOption();
     }
-    
+
     private void PrintCustomUserTranslation(string userKey)
     {
         Console.WriteLine();
-        
+
         foreach (var possibleOutputs in translator.GetAllLanguages(userKey))
         {
             Console.WriteLine(possibleOutputs);

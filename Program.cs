@@ -6,22 +6,11 @@ internal static class Program
     {
         var language = GetUserLanguage();
         var version = GetUserPreferredVersion();
-        var normal = new NormalTranslation(language);
-        var fancy = new FancyTranslation(language);
 
-        switch (version)
-        {
-            case "normal":
-            {
-                normal.Execute();
-                break;
-            }
-            case "fancy":
-            {
-                fancy.Execute();
-                break;
-            }
-        }
+        ITranslator translator = version is "fancy"
+            ? new FancyTranslation(language)
+            : new NormalTranslation(language);
+        translator.Execute();
     }
 
     private static string GetUserLanguage()
@@ -49,4 +38,9 @@ internal static class Program
             }
         }
     }
+}
+
+interface ITranslator
+{
+    public void Execute();
 }
