@@ -2,7 +2,7 @@ namespace TranslatingStuffs;
 
 public static class DictionaryProvider
 {
-    internal static Dictionary<string, string> EnDic = new()
+    internal static readonly Dictionary<string, string> EnDic = new()
     {
         { "welcome", "Hello and Welcome to ze Translator." },
         { "userState", "How are you?" },
@@ -19,7 +19,7 @@ public static class DictionaryProvider
         { "sendingTo", "Sending you to"}
     };
 
-    internal static Dictionary<string, string> DeDic = new()
+    internal static readonly Dictionary<string, string> DeDic = new()
     {
         { "welcome", "Hallo und herzlich willkommen zum Übersetzter." },
         { "userState", "Wie geht es dir?" },
