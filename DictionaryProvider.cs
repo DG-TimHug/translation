@@ -12,14 +12,13 @@ public class DictionaryProvider(string language)
         return language == "en" ? enDic.ContainsKey(key) : deDic.ContainsKey(key);
     }
 
-    public string GetDeText(string key)
+    public List<string> GetAllLanguages(string key)
     {
-        return deDic[key];
-    }
-
-    public string GetEnText(string key)
-    {
-        return enDic[key];
+        return
+        [
+            enDic[key],
+            deDic[key]
+        ];
     }
 
     private readonly Dictionary<string, string> enDic = new()

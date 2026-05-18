@@ -4,13 +4,13 @@ namespace TranslatingStuffs;
 
 public class FancyTranslation(string language)
 {
-    private readonly DictionaryProvider provider = new(language);
+    private readonly DictionaryProvider translator = new(language);
 
     public void Execute()
     {
         AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine($"[teal]{provider.GetText("welcome")}[/]");
-        AnsiConsole.WriteLine(provider.GetText("selectedLanguage"));
+        AnsiConsole.MarkupLine($"[teal]{translator.GetText("welcome")}[/]");
+        AnsiConsole.WriteLine(translator.GetText("selectedLanguage"));
 
         var userOption = ListAndSelectOptions();
 
@@ -20,10 +20,10 @@ public class FancyTranslation(string language)
             {
                 case "option1":
                 {
-                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("welcome")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("selectedLanguage")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("userState")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("rate")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("welcome")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("selectedLanguage")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("userState")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("rate")}[/]");
                     break;
                 }
                 case "option2":
@@ -39,26 +39,26 @@ public class FancyTranslation(string language)
 
     private DisplayPair ListAndSelectOptions()
     {
-        DisplayPair option1 = new DisplayPair
+        var option1 = new DisplayPair
         {
             Key = "option1",
-            Display = provider.GetText("option1"),
+            Display = translator.GetText("option1"),
         };
 
-        DisplayPair option2 = new DisplayPair
+        var option2 = new DisplayPair
         {
             Key = "option2",
-            Display = provider.GetText("option2"),
+            Display = translator.GetText("option2"),
         };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
-                .Title(provider.GetText("options"))
+                .Title(translator.GetText("options"))
                 .UseConverter(option => option.Display)
                 .AddChoices(option1, option2)
         );
 
-        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{choice.Display}[/]");
+        AnsiConsole.MarkupLine($"{translator.GetText("sendingTo")} [blue]{choice.Display}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
@@ -68,29 +68,37 @@ public class FancyTranslation(string language)
         do
         {
             var userKey = GetCustomUserTranslation();
-            Console.WriteLine();
-            AnsiConsole.MarkupLine($"[teal]{provider.GetEnText(userKey)}[/]");
-            AnsiConsole.MarkupLine($"[teal]{provider.GetDeText(userKey)}[/]");
-            Console.WriteLine();
+            PrintCustomUserTranslation(userKey);
             AnsiConsole.MarkupLine(
-                $"[red]{provider.GetText("leaveInfo")}[/] [green]{provider.GetText("continueInfo")}[/]"
+                $"[red]{translator.GetText("leaveInfo")}[/] [green]{translator.GetText("continueInfo")}[/]"
             );
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
     private string GetCustomUserTranslation()
     {
-        AnsiConsole.MarkupLine($"[yellow]{provider.GetText("keyPlease")}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{translator.GetText("keyPlease")}[/]");
         while (true)
         {
             var userKey = Console.ReadLine();
-            if (!string.IsNullOrEmpty(userKey) && provider.ContainsKeyPair(userKey))
+            if (!string.IsNullOrEmpty(userKey) && translator.ContainsKeyPair(userKey))
             {
                 return userKey;
             }
 
-            AnsiConsole.MarkupLine($"[red]{provider.GetText("askValidKey")}[/]");
+            AnsiConsole.MarkupLine($"[red]{translator.GetText("askValidKey")}[/]");
         }
+    }
+
+    private void PrintCustomUserTranslation(string userKey)
+    {
+        Console.WriteLine();
+        
+        foreach (var possibleOutputs in translator.GetAllLanguages(userKey))
+        {
+            AnsiConsole.MarkupLine($"[teal]{possibleOutputs}[/]");
+        }
+        Console.WriteLine();
     }
 }
 
@@ -99,3 +107,4 @@ public record DisplayPair
     public required string Key { get; init; }
     public required string Display { get; init; }
 }
+
