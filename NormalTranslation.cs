@@ -2,12 +2,13 @@ namespace TranslatingStuffs;
 
 public class NormalTranslation(string language)
 {
-    private DictionaryProvider provider = new (language);
-    public  void Execute()
+    private readonly DictionaryProvider provider = new(language);
+
+    public void Execute()
     {
         Console.WriteLine(provider.GetText("welcome"));
         Console.WriteLine(provider.GetText("selectedLanguage"));
-        
+
         var userOption = ListAndSelectOptions();
 
         while (true)
@@ -36,8 +37,8 @@ public class NormalTranslation(string language)
             }
         }
     }
-    
-    private  int GetUserOption()
+
+    private int GetUserOption()
     {
         while (true)
         {
@@ -48,23 +49,23 @@ public class NormalTranslation(string language)
             Console.WriteLine(provider.GetText("optionsPlease"));
         }
     }
-    
-    private  void CustomUserTranslation()
+
+    private void CustomUserTranslation()
     {
         do
         {
             var userKey = GetCustomUserTranslation();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(DictionaryProvider.DeDic[userKey]);
-            Console.WriteLine(DictionaryProvider.EnDic[userKey]);
+            //Console.WriteLine(DictionaryProvider.DeDic[userKey]);
+            //Console.WriteLine(DictionaryProvider.EnDic[userKey]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine(provider.GetText("leaveInfo"), provider.GetText("continueInfo"));
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
-    private  string GetCustomUserTranslation()
+    private string GetCustomUserTranslation()
     {
         PrintKeyPlease();
         while (true)
@@ -88,13 +89,14 @@ public class NormalTranslation(string language)
         return GetUserOption();
     }
 
-    private  void PrintKeyPlease()
+    private void PrintKeyPlease()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(provider.GetText("keyPlease"));
         Console.ForegroundColor = ConsoleColor.White;
     }
-    private  void PrintAskValidKey()
+
+    private void PrintAskValidKey()
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(provider.GetText("askValidKey"));

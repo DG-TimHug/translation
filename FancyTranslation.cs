@@ -4,13 +4,15 @@ namespace TranslatingStuffs;
 
 public class FancyTranslation(string language)
 {
+    private DictionaryProvider provider = new(language);
+
     public void Execute()
     {
         AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine($"[teal]{dic["welcome"]}[/]");
-        AnsiConsole.WriteLine(dic["selectedLanguage"]);
+        AnsiConsole.MarkupLine($"[teal]{provider.GetText("welcome")}[/]");
+        AnsiConsole.WriteLine(provider.GetText("selectedLanguage"));
 
-        var userOption = ListAndSelectOptions(dic);
+        var userOption = ListAndSelectOptions();
 
         while (true)
         {
@@ -18,64 +20,66 @@ public class FancyTranslation(string language)
             {
                 case "option1":
                 {
-                    AnsiConsole.MarkupLine($"[teal]{dic["welcome"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{dic["selectedLanguage"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{dic["userState"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{dic["rate"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("welcome")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("selectedLanguage")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("userState")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{provider.GetText("rate")}[/]");
                     break;
                 }
                 case "option2":
                 {
-                    CustomUserTranslation(dic);
+                    CustomUserTranslation();
                     break;
                 }
-
             }
-            userOption = ListAndSelectOptions(dic);
+            userOption = ListAndSelectOptions();
         }
     }
 
     private (string Key, string display) ListAndSelectOptions()
     {
-        var option1 = ("option1", dic["option1"]);
-        var option2 = ("option2", dic["option2"]);
+        var option1 = ("option1", provider.GetText("option1"));
+        var option2 = ("option2", provider.GetText("option2"));
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<(string Key, string Display)>()
-                .Title(dic["options"])
+                .Title(provider.GetText("options"))
                 .UseConverter(option => option.Display)
-                .AddChoices(option1, option2));
+                .AddChoices(option1, option2)
+        );
 
-        AnsiConsole.MarkupLine($"{dic["sendingTo"]} [blue]{choice.Item2}[/]");
+        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{choice.Item2}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
 
-    private static void CustomUserTranslation(Dictionary<string, string> dic)
+    private void CustomUserTranslation()
     {
         do
         {
-            var userKey = GetCustomUserTranslation(dic);
+            var userKey = GetCustomUserTranslation();
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
-            AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
+            //AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
+            //AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[red]{dic["leaveInfo"]}[/] [green]{dic["continueInfo"]}[/]");
+            AnsiConsole.MarkupLine(
+                $"[red]{provider.GetText("leaveInfo")}[/] [green]{provider.GetText("continueInfo")}[/]"
+            );
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
-    private static string GetCustomUserTranslation(Dictionary<string, string> dic)
+    private string GetCustomUserTranslation()
     {
-        AnsiConsole.MarkupLine($"[yellow]{dic["keyPlease"]}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{provider.GetText("keyPlease")}[/]");
         while (true)
         {
             var userKey = Console.ReadLine();
-            if (!string.IsNullOrEmpty(userKey) && dic.ContainsKey(userKey))
+            if (!string.IsNullOrEmpty(userKey) && provider.ContainsKeyPair(userKey))
             {
                 return userKey;
             }
 
-            AnsiConsole.MarkupLine($"[red]{dic["askValidKey"]}[/]");
+            AnsiConsole.MarkupLine($"[red]{provider.GetText("askValidKey")}[/]");
         }
     }
 }

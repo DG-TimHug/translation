@@ -3,7 +3,7 @@
 internal static class Program
 {
     static void Main()
-    { 
+    {
         var language = GetUserLanguage();
 
         var version = GetUserPreferredVersion();
@@ -24,7 +24,7 @@ internal static class Program
             }
         }
     }
-    
+
     private static string GetUserLanguage()
     {
         while (true)
@@ -37,7 +37,7 @@ internal static class Program
             }
         }
     }
-    
+
     private static string GetUserPreferredVersion()
     {
         while (true)
