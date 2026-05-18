@@ -7,17 +7,19 @@ internal static class Program
         var language = GetUserLanguage();
 
         var version = GetUserPreferredVersion();
+        var normal = new NormalTranslation(language);
+        var fancy = new FancyTranslation(language);
 
         switch (version)
         {
             case "normal":
             {
-                NormalTranslation.Execute(language);
+                normal.Execute();
                 break;
             }
             case "fancy":
             {
-                FancyTranslation.Execute(language);
+                fancy.Execute();
                 break;
             }
         }

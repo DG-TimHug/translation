@@ -1,14 +1,14 @@
 namespace TranslatingStuffs;
 
-public static class NormalTranslation
+public class NormalTranslation(string language)
 {
-    public static void Execute(string language)
+    private DictionaryProvider provider = new (language);
+    public  void Execute()
     {
-        var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
-        Console.WriteLine(active["welcome"]);
-        Console.WriteLine(active["selectedLanguage"]);
+        Console.WriteLine(provider.GetText("welcome"));
+        Console.WriteLine(provider.GetText("selectedLanguage"));
         
-        var userOption = ListAndSelectOptions(active);
+        var userOption = ListAndSelectOptions();
 
         while (true)
         {
@@ -16,28 +16,28 @@ public static class NormalTranslation
             {
                 case 1:
                 {
-                    Console.WriteLine(active["welcome"]);
-                    Console.WriteLine(active["selectedLanguage"]);
-                    Console.WriteLine(active["userState"]);
-                    Console.WriteLine(active["rate"]);
+                    Console.WriteLine(provider.GetText("welcome"));
+                    Console.WriteLine(provider.GetText("selectedLanguage"));
+                    Console.WriteLine(provider.GetText("userState"));
+                    Console.WriteLine(provider.GetText("rate"));
                     goto default;
                 }
                 case 2:
                 {
-                    CustomUserTranslation(active);
+                    CustomUserTranslation();
                     goto default;
                 }
 
                 default:
                 {
-                    userOption = ListAndSelectOptions(active);
+                    userOption = ListAndSelectOptions();
                     break;
                 }
             }
         }
     }
     
-    private static int GetUserOption(Dictionary<string,string> active)
+    private  int GetUserOption()
     {
         while (true)
         {
@@ -45,59 +45,59 @@ public static class NormalTranslation
             {
                 return userOption;
             }
-            Console.WriteLine(active["optionsPlease"]);
+            Console.WriteLine(provider.GetText("optionsPlease"));
         }
     }
     
-    private static void CustomUserTranslation(Dictionary<string,string> active)
+    private  void CustomUserTranslation()
     {
         do
         {
-            var userKey = GetCustomUserTranslation(active);
+            var userKey = GetCustomUserTranslation();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(DictionaryProvider.DeDic[userKey]);
             Console.WriteLine(DictionaryProvider.EnDic[userKey]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-            Console.WriteLine(active["leaveInfo"], active["continueInfo"]);
+            Console.WriteLine(provider.GetText("leaveInfo"), provider.GetText("continueInfo"));
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
-    private static string GetCustomUserTranslation(Dictionary<string, string> active)
+    private  string GetCustomUserTranslation()
     {
-        PrintKeyPlease(active);
+        PrintKeyPlease();
         while (true)
         {
             var userKey = Console.ReadLine();
-            if (!string.IsNullOrEmpty(userKey) && active.ContainsKey(userKey))
+            if (!string.IsNullOrEmpty(userKey) && provider.ContainsKeyPair(userKey))
             {
                 return userKey;
             }
-            PrintAskValidKey(active);
+            PrintAskValidKey();
         }
     }
 
-    private static int ListAndSelectOptions(Dictionary<string,string> active)
+    private int ListAndSelectOptions()
     {
         Console.WriteLine();
-        Console.WriteLine(active["options"]);
-        Console.WriteLine(active["option1"]);
-        Console.WriteLine(active["option2"]);
+        Console.WriteLine(provider.GetText("options"));
+        Console.WriteLine(provider.GetText("option1"));
+        Console.WriteLine(provider.GetText("option2"));
         Console.WriteLine();
-        return GetUserOption(active);
+        return GetUserOption();
     }
 
-    private static void PrintKeyPlease(Dictionary<string, string> active)
+    private  void PrintKeyPlease()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(active["keyPlease"]);
+        Console.WriteLine(provider.GetText("keyPlease"));
         Console.ForegroundColor = ConsoleColor.White;
     }
-    private static void PrintAskValidKey(Dictionary<string, string> active)
+    private  void PrintAskValidKey()
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(active["askValidKey"]);
+        Console.WriteLine(provider.GetText("askValidKey"));
         Console.ForegroundColor = ConsoleColor.White;
     }
 }

@@ -1,8 +1,27 @@
 namespace TranslatingStuffs;
 
-public static class DictionaryProvider
+public class DictionaryProvider(string language)
 {
-    internal static readonly Dictionary<string, string> EnDic = new()
+    public string GetText(string key)
+    {
+        if (language == "en")
+        {
+            return enDic[key];
+        }
+
+        return deDic[key];
+    }
+
+    public bool ContainsKeyPair(string key)
+    {
+        if (language == "en")
+        {
+            return enDic.ContainsKey(key);
+        }
+
+        return deDic.ContainsKey(key);
+    }
+    private readonly Dictionary<string, string> enDic = new()
     {
         { "welcome", "Hello and Welcome to ze Translator." },
         { "userState", "How are you?" },
@@ -19,7 +38,7 @@ public static class DictionaryProvider
         { "sendingTo", "Sending you to"}
     };
 
-    internal static readonly Dictionary<string, string> DeDic = new()
+    private readonly Dictionary<string, string> deDic = new()
     {
         { "welcome", "Hallo und herzlich willkommen zum Übersetzter." },
         { "userState", "Wie geht es dir?" },

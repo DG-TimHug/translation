@@ -2,11 +2,10 @@ using Spectre.Console;
 
 namespace TranslatingStuffs;
 
-public static class FancyTranslation
+public class FancyTranslation(string language)
 {
-    public static void Execute(string language)
+    public void Execute()
     {
-        var dic = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
         AnsiConsole.WriteLine();
         AnsiConsole.MarkupLine($"[teal]{dic["welcome"]}[/]");
         AnsiConsole.WriteLine(dic["selectedLanguage"]);
@@ -36,7 +35,7 @@ public static class FancyTranslation
         }
     }
 
-    private static (string Key, string display) ListAndSelectOptions(Dictionary<string, string> dic)
+    private (string Key, string display) ListAndSelectOptions()
     {
         var option1 = ("option1", dic["option1"]);
         var option2 = ("option2", dic["option2"]);
