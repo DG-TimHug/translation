@@ -4,22 +4,12 @@ public class DictionaryProvider(string language)
 {
     public string GetText(string key)
     {
-        if (language == "en")
-        {
-            return enDic[key];
-        }
-
-        return deDic[key];
+        return language == "en" ? enDic[key] : deDic[key];
     }
 
     public bool ContainsKeyPair(string key)
     {
-        if (language == "en")
-        {
-            return enDic.ContainsKey(key);
-        }
-
-        return deDic.ContainsKey(key);
+        return language == "en" ? enDic.ContainsKey(key) : deDic.ContainsKey(key);
     }
 
     public string GetDeText(string key)

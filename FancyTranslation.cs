@@ -5,7 +5,6 @@ namespace TranslatingStuffs;
 public class FancyTranslation(string language)
 {
     private readonly DictionaryProvider provider = new(language);
-    private readonly DisplayPair displayPair = new();
 
     public void Execute()
     {
@@ -40,17 +39,26 @@ public class FancyTranslation(string language)
 
     private DisplayPair ListAndSelectOptions()
     {
-        var option1 = ("option1", provider.GetText("option1"));
-        var option2 = ("option2", provider.GetText("option2"));
+        DisplayPair option1 = new DisplayPair
+        {
+            Key = "option1",
+            Display = provider.GetText("option1"),
+        };
+
+        DisplayPair option2 = new DisplayPair
+        {
+            Key = "option2",
+            Display = provider.GetText("option2"),
+        };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
                 .Title(provider.GetText("options"))
                 .UseConverter(option => option.Display)
-                .AddChoices<>(option1, option2)
+                .AddChoices(option1, option2)
         );
 
-        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{displayPair.Display}[/]");
+        AnsiConsole.MarkupLine($"{provider.GetText("sendingTo")} [blue]{choice.Display}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
@@ -88,6 +96,6 @@ public class FancyTranslation(string language)
 
 public record DisplayPair
 {
-    public string Key { get; init; }
-    public string Display { get; init; }
+    public required string Key { get; init; }
+    public required string Display { get; init; }
 }
