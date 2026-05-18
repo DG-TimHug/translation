@@ -6,12 +6,12 @@ public static class FancyTranslation
 {
     public static void Execute(string language)
     {
-        var active = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
+        var dic = language == "en" ? DictionaryProvider.EnDic : DictionaryProvider.DeDic;
         AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
-        AnsiConsole.WriteLine(active["selectedLanguage"]);
+        AnsiConsole.MarkupLine($"[teal]{dic["welcome"]}[/]");
+        AnsiConsole.WriteLine(dic["selectedLanguage"]);
 
-        var userOption = ListAndSelectOptions(active);
+        var userOption = ListAndSelectOptions(dic);
 
         while (true)
         {
@@ -19,68 +19,64 @@ public static class FancyTranslation
             {
                 case "option1":
                 {
-                    AnsiConsole.MarkupLine($"[teal]{active["welcome"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{active["selectedLanguage"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{active["userState"]}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{active["rate"]}[/]");
-                    goto default;
+                    AnsiConsole.MarkupLine($"[teal]{dic["welcome"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{dic["selectedLanguage"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{dic["userState"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{dic["rate"]}[/]");
+                    break;
                 }
                 case "option2":
                 {
-                    CustomUserTranslation(active);
-                    goto default;
-                }
-
-                default:
-                {
-                    userOption = ListAndSelectOptions(active);
+                    CustomUserTranslation(dic);
                     break;
                 }
+
             }
+            userOption = ListAndSelectOptions(dic);
         }
     }
 
-    private static (string Key, string display) ListAndSelectOptions(Dictionary<string, string> active)
+    private static (string Key, string display) ListAndSelectOptions(Dictionary<string, string> dic)
     {
-        var option1 = ("option1", active["option1"]);
-        var option2 = ("option2", active["option2"]);
+        var option1 = ("option1", dic["option1"]);
+        var option2 = ("option2", dic["option2"]);
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<(string Key, string Display)>()
-                .Title(active["options"])
+                .Title(dic["options"])
                 .UseConverter(option => option.Display)
                 .AddChoices(option1, option2));
 
-        AnsiConsole.MarkupLine($"{active["sendingTo"]} [blue]{choice.Item2}[/]");
+        AnsiConsole.MarkupLine($"{dic["sendingTo"]} [blue]{choice.Item2}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
 
-    private static void CustomUserTranslation(Dictionary<string, string> active)
+    private static void CustomUserTranslation(Dictionary<string, string> dic)
     {
         do
         {
-            var userKey = GetCustomUserTranslation(active);
+            var userKey = GetCustomUserTranslation(dic);
             Console.WriteLine();
             AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.EnDic[userKey]}[/]");
             AnsiConsole.MarkupLine($"[teal]{DictionaryProvider.DeDic[userKey]}[/]");
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[red]{active["leaveInfo"]}[/] [green]{active["continueInfo"]}[/]");
+            AnsiConsole.MarkupLine($"[red]{dic["leaveInfo"]}[/] [green]{dic["continueInfo"]}[/]");
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
-    private static string GetCustomUserTranslation(Dictionary<string, string> active)
+    private static string GetCustomUserTranslation(Dictionary<string, string> dic)
     {
-        AnsiConsole.MarkupLine($"[yellow]{active["keyPlease"]}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{dic["keyPlease"]}[/]");
         while (true)
         {
             var userKey = Console.ReadLine();
-            if (!string.IsNullOrEmpty(userKey) && active.ContainsKey(userKey))
+            if (!string.IsNullOrEmpty(userKey) && dic.ContainsKey(userKey))
             {
                 return userKey;
             }
 
-            AnsiConsole.MarkupLine($"[red]{active["validKey"]}[/]");
+            AnsiConsole.MarkupLine($"[red]{dic["askValidKey"]}[/]");
         }
     }
 }

@@ -15,7 +15,7 @@ public static class DictionaryProvider
         { "keyPlease", "Please enter your key for the translation!"},
         { "leaveInfo", "Press ESC to leave."},
         { "continueInfo", "Or Enter to continue."},
-        { "validKey", "Please provide a Valid Key!"},
+        { "askValidKey", "Please provide a Valid Key!"},
         { "sendingTo", "Sending you to"}
     };
 
@@ -32,7 +32,7 @@ public static class DictionaryProvider
         { "keyPlease", "Bitte gib den Schlüssel für deine Übersetung ein!"},
         { "leaveInfo", "Drücke ESC um zu verlassen."},
         { "continueInfo", "Oder Enter um weiter zumachen."},
-        { "validKey", "Bitte stelle einen gültigen Schlüssel zur verfügung!"},
+        { "askValidKey", "Bitte stelle einen gültigen Schlüssel zur verfügung!"},
         { "sendingTo" , "Wir senden dich zur"}
     };
 }

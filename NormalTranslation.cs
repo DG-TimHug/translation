@@ -66,7 +66,7 @@ public static class NormalTranslation
 
     private static string GetCustomUserTranslation(Dictionary<string, string> active)
     {
-        KeyPlease(active);
+        PrintKeyPlease(active);
         while (true)
         {
             var userKey = Console.ReadLine();
@@ -74,7 +74,7 @@ public static class NormalTranslation
             {
                 return userKey;
             }
-            ValidKey(active);
+            PrintAskValidKey(active);
         }
     }
 
@@ -88,16 +88,16 @@ public static class NormalTranslation
         return GetUserOption(active);
     }
 
-    private static void KeyPlease(Dictionary<string, string> active)
+    private static void PrintKeyPlease(Dictionary<string, string> active)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(active["keyPlease"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
-    private static void ValidKey(Dictionary<string, string> active)
+    private static void PrintAskValidKey(Dictionary<string, string> active)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(active["validKey"]);
+        Console.WriteLine(active["askValidKey"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
 }
