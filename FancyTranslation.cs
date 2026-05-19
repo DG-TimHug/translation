@@ -9,8 +9,8 @@ public class FancyTranslation(string language) : ITranslator
     public void Execute()
     {
         AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine($"[teal]{translator.GetText("welcome")}[/]");
-        AnsiConsole.WriteLine(translator.GetText("selectedLanguage"));
+        AnsiConsole.MarkupLine($"[teal]{translator["welcome"]}[/]");
+        AnsiConsole.WriteLine(translator["selectedLanguage"]);
 
         var userOption = ListAndSelectOptions();
 
@@ -20,10 +20,10 @@ public class FancyTranslation(string language) : ITranslator
             {
                 case "option1":
                 {
-                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("welcome")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("selectedLanguage")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("userState")}[/]");
-                    AnsiConsole.MarkupLine($"[teal]{translator.GetText("rate")}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator["welcome"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator["selectedLanguage"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator["userState"]}[/]");
+                    AnsiConsole.MarkupLine($"[teal]{translator["rate"]}[/]");
                     break;
                 }
                 case "option2":
@@ -39,18 +39,18 @@ public class FancyTranslation(string language) : ITranslator
 
     private DisplayPair ListAndSelectOptions()
     {
-        var option1 = new DisplayPair { Key = "option1", Display = translator.GetText("option1") };
+        var option1 = new DisplayPair { Key = "option1", Display = translator["option1"] };
 
-        var option2 = new DisplayPair { Key = "option2", Display = translator.GetText("option2") };
+        var option2 = new DisplayPair { Key = "option2", Display = translator["option1"] };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
-                .Title(translator.GetText("options"))
+                .Title(translator["options"])
                 .UseConverter(option => option.Display)
                 .AddChoices(option1, option2)
         );
 
-        AnsiConsole.MarkupLine($"{translator.GetText("sendingTo")} [blue]{choice.Display}[/]");
+        AnsiConsole.MarkupLine($"{translator["sendingTo"]} [blue]{choice.Display}[/]");
         AnsiConsole.WriteLine();
         return choice;
     }
@@ -62,14 +62,14 @@ public class FancyTranslation(string language) : ITranslator
             var userKey = GetCustomUserTranslation();
             PrintCustomUserTranslation(userKey);
             AnsiConsole.MarkupLine(
-                $"[red]{translator.GetText("leaveInfo")}[/] [green]{translator.GetText("continueInfo")}[/]"
+                $"[red]{translator["leaveInfo"]}[/] [green]{translator["continueInfo"]}[/]"
             );
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
     private string GetCustomUserTranslation()
     {
-        AnsiConsole.MarkupLine($"[yellow]{translator.GetText("keyPlease")}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{translator["keyPlease"]}[/]");
         while (true)
         {
             var userKey = Console.ReadLine();
@@ -78,7 +78,7 @@ public class FancyTranslation(string language) : ITranslator
                 return userKey;
             }
 
-            AnsiConsole.MarkupLine($"[red]{translator.GetText("askValidKey")}[/]");
+            AnsiConsole.MarkupLine($"[red]{translator["askValidKey"]}[/]");
         }
     }
 

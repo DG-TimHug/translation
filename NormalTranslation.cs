@@ -6,8 +6,8 @@ public class NormalTranslation(string language) : ITranslator
 
     public void Execute()
     {
-        Console.WriteLine(translator.GetText("welcome"));
-        Console.WriteLine(translator.GetText("selectedLanguage"));
+        Console.WriteLine(translator["welcome"]);
+        Console.WriteLine(translator["selectedLanguage"]);
 
         var userOption = ListAndSelectOptions();
 
@@ -17,10 +17,10 @@ public class NormalTranslation(string language) : ITranslator
             {
                 case 1:
                 {
-                    Console.WriteLine(translator.GetText("welcome"));
-                    Console.WriteLine(translator.GetText("selectedLanguage"));
-                    Console.WriteLine(translator.GetText("userState"));
-                    Console.WriteLine(translator.GetText("rate"));
+                    Console.WriteLine(translator["welcome"]);
+                    Console.WriteLine(translator["selectedLanguage"]);
+                    Console.WriteLine(translator["userState"]);
+                    Console.WriteLine(translator["rate"]);
                     goto default;
                 }
                 case 2:
@@ -46,7 +46,7 @@ public class NormalTranslation(string language) : ITranslator
             {
                 return userOption;
             }
-            Console.WriteLine(translator.GetText("optionsPlease"));
+            Console.WriteLine(translator["optionsPlease"]);
         }
     }
 
@@ -60,7 +60,7 @@ public class NormalTranslation(string language) : ITranslator
             PrintCustomUserTranslation(userKey);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-            Console.WriteLine(translator.GetText("leaveInfo"), translator.GetText("continueInfo"));
+            Console.WriteLine(translator["leaveInfo"], translator["continueInfo"]);
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
     }
 
@@ -81,9 +81,9 @@ public class NormalTranslation(string language) : ITranslator
     private int ListAndSelectOptions()
     {
         Console.WriteLine();
-        Console.WriteLine(translator.GetText("options"));
-        Console.WriteLine(translator.GetText("option1"));
-        Console.WriteLine(translator.GetText("option2"));
+        Console.WriteLine(translator["options"]);
+        Console.WriteLine(translator["option1"]);
+        Console.WriteLine(translator["option2"]);
         Console.WriteLine();
         return GetUserOption();
     }
@@ -102,14 +102,14 @@ public class NormalTranslation(string language) : ITranslator
     private void PrintKeyPlease()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(translator.GetText("keyPlease"));
+        Console.WriteLine(translator["keyPlease"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
 
     private void PrintAskValidKey()
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(translator.GetText("askValidKey"));
+        Console.WriteLine(translator["askValidKey"]);
         Console.ForegroundColor = ConsoleColor.White;
     }
 }

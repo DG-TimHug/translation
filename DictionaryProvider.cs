@@ -2,7 +2,9 @@ namespace TranslatingStuffs;
 
 public class DictionaryProvider(string language)
 {
-    public string GetText(string key)
+    public string this[string key] => GetText(key);
+
+    private string GetText(string key)
     {
         return language == "en" ? enDic[key] : deDic[key];
     }
