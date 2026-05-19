@@ -21,20 +21,16 @@ public class NormalTranslation(string language) : ITranslator
                     Console.WriteLine(translator["selectedLanguage"]);
                     Console.WriteLine(translator["userState"]);
                     Console.WriteLine(translator["rate"]);
-                    goto default;
+                    break;
                 }
                 case 2:
                 {
                     CustomUserTranslation();
-                    goto default;
-                }
-
-                default:
-                {
-                    userOption = ListAndSelectOptions();
                     break;
                 }
             }
+
+            userOption = ListAndSelectOptions();
         }
     }
 
