@@ -2,7 +2,7 @@ namespace TranslatingStuffs;
 
 public class NormalTranslation(string language) : ITranslator
 {
-    private readonly DictionaryProvider translator = new(language);
+    private readonly Translator translator = new(language);
 
     public void Execute()
     {
@@ -82,8 +82,8 @@ public class NormalTranslation(string language) : ITranslator
     {
         Console.WriteLine();
         Console.WriteLine(translator["options"]);
-        Console.WriteLine(translator["option1"]);
-        Console.WriteLine(translator["option2"]);
+        Console.WriteLine(translator["optionDefaultTranslations"]);
+        Console.WriteLine(translator["optionCustomTranslation"]);
         Console.WriteLine();
         return GetUserOption();
     }

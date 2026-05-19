@@ -4,7 +4,7 @@ namespace TranslatingStuffs;
 
 public class FancyTranslation(string language) : ITranslator
 {
-    private readonly DictionaryProvider translator = new(language);
+    private readonly Translator translator = new(language);
 
     public void Execute()
     {
@@ -18,7 +18,7 @@ public class FancyTranslation(string language) : ITranslator
         {
             switch (userOption.Key)
             {
-                case "option1":
+                case "optionDefaultTranslations":
                 {
                     AnsiConsole.MarkupLine($"[teal]{translator["welcome"]}[/]");
                     AnsiConsole.MarkupLine($"[teal]{translator["selectedLanguage"]}[/]");
@@ -26,7 +26,7 @@ public class FancyTranslation(string language) : ITranslator
                     AnsiConsole.MarkupLine($"[teal]{translator["rate"]}[/]");
                     break;
                 }
-                case "option2":
+                case "optionCustomTranslation":
                 {
                     CustomUserTranslation();
                     break;
@@ -39,9 +39,9 @@ public class FancyTranslation(string language) : ITranslator
 
     private DisplayPair ListAndSelectOptions()
     {
-        var option1 = new DisplayPair { Key = "option1", Display = translator["option1"] };
+        var option1 = new DisplayPair { Key = "optionDefaultTranslations", Display = translator["optionDefaultTranslations"] };
 
-        var option2 = new DisplayPair { Key = "option2", Display = translator["option1"] };
+        var option2 = new DisplayPair { Key = "optionCustomTranslation", Display = translator["optionCustomTranslation"] };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
