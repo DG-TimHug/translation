@@ -66,7 +66,10 @@ public class NormalTranslation(string language) : ITranslator
 
     private string GetCustomUserTranslation()
     {
-        PrintKeyPlease();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(translator["keyPlease"]);
+        Console.ForegroundColor = ConsoleColor.White;
+
         while (true)
         {
             var userKey = Console.ReadLine();
@@ -74,7 +77,10 @@ public class NormalTranslation(string language) : ITranslator
             {
                 return userKey;
             }
-            PrintAskValidKey();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(translator["askValidKey"]);
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 
@@ -96,20 +102,7 @@ public class NormalTranslation(string language) : ITranslator
         {
             Console.WriteLine(possibleOutputs);
         }
+
         Console.WriteLine();
-    }
-
-    private void PrintKeyPlease()
-    {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(translator["keyPlease"]);
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-
-    private void PrintAskValidKey()
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(translator["askValidKey"]);
-        Console.ForegroundColor = ConsoleColor.White;
     }
 }

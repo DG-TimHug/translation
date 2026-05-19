@@ -26,7 +26,10 @@ public class Translator(string language)
         { "rate", "Please leave a rating of this fake translator." },
         { "selectedLanguage", "You have selected the english Language." },
         { "options", "Dear User you now have 2 Options." },
-        { "optionDefaultTranslations", "Option 1: Get some Default Translations in your current Language." },
+        {
+            "optionDefaultTranslations",
+            "Option 1: Get some Default Translations in your current Language."
+        },
         {
             "optionCustomTranslation",
             "Option 2: Enter the key for any one Translation and get the text for the current language as well as for the Translated Language."
@@ -46,7 +49,10 @@ public class Translator(string language)
         { "rate", "Bitte hinterlasse eine fake Bewertung zu diesem nicht echten Übersetzer." },
         { "selectedLanguage", "Du hast die deutsche Sprache ausgewählt." },
         { "options", "Lieber Nutzer, du hast nun 2 Optionen. " },
-        { "optionDefaultTranslations", "Option 1: Erhalte ein paar Standart Übersetzungen in deiner Sprache." },
+        {
+            "optionDefaultTranslations",
+            "Option 1: Erhalte ein paar Standart Übersetzungen in deiner Sprache."
+        },
         {
             "optionCustomTranslation",
             "Option 2: Gib den Schlüssel für irgendene Übersetzung ein und erhalte die Übersetzung für deine aktuelle Sprache sowie auch für die übersetzte Sprache."

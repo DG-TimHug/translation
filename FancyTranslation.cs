@@ -39,9 +39,17 @@ public class FancyTranslation(string language) : ITranslator
 
     private DisplayPair ListAndSelectOptions()
     {
-        var option1 = new DisplayPair { Key = "optionDefaultTranslations", Display = translator["optionDefaultTranslations"] };
+        var option1 = new DisplayPair
+        {
+            Key = "optionDefaultTranslations",
+            Display = translator["optionDefaultTranslations"],
+        };
 
-        var option2 = new DisplayPair { Key = "optionCustomTranslation", Display = translator["optionCustomTranslation"] };
+        var option2 = new DisplayPair
+        {
+            Key = "optionCustomTranslation",
+            Display = translator["optionCustomTranslation"],
+        };
         AnsiConsole.WriteLine();
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<DisplayPair>()
